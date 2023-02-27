@@ -38,7 +38,7 @@ class TeacherService implements TeacherServiceInterface
         $data = [
             'name' => $request->name,
             'email' => $request->email,
-            'password'=>$request->password,
+            'password' => Hash::make($request->password),
             'phone01' => $request->phone01,
             'phone02' => $request->phone02,
             'address' => $request->address,

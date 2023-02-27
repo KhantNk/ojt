@@ -37,10 +37,28 @@ Route::post('/courses/update/{id}', [CourseController::class, 'update']);
 Route::get('/courses/show/{id}', [CourseController::class, 'show']);
 Route::delete('/courses/delete/{id}', [CourseController::class, 'destroy']);
 
-Route::get('/teachers', [TeacherController::class, 'showList']);
-Route::get('/teachers/create', [TeacherController::class, 'create']);
-Route::post('/teachers/store', [TeacherController::class, 'store']);
-Route::get('/teachers/edit/{id}', [TeacherController::class, 'edit']);
-Route::post('/teachers/update/{id}', [TeacherController::class, 'update']);
-Route::get('/teachers/show/{id}', [TeacherController::class, 'show']);
-Route::delete('/teachers/delete/{id}', [TeacherController::class, 'destroy']);
+
+Route::get('/login', [TeacherController::class, 'showLoginForm']);
+Route::post('/login', [TeacherController::class, 'login']);
+
+
+// Route::group(
+//     ['middleware' => 'useAuth'],
+//     function () {
+            Route::group(
+                ['prefix' => 'teachers'],
+                function () {
+                    Route::get('/', [TeacherController::class, 'showList']);
+                    Route::get('/create', [TeacherController::class, 'create']);
+                    Route::post('/store', [TeacherController::class, 'store']);
+                    Route::get('/edit/{id}', [TeacherController::class, 'edit']);
+                    Route::post('/update/{id}', [TeacherController::class, 'update']);
+                    Route::get('/show/{id}', [TeacherController::class, 'show']);
+                    Route::delete('/delete/{id}', [TeacherController::class, 'destroy']);
+                    Route::view('/home', 'home');
+                    Route::get('/logout', [TeacherController::class, 'logout']);
+                }
+            );
+
+//     // }
+// );

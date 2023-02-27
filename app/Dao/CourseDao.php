@@ -45,6 +45,11 @@ class CourseDao implements CourseDaoInterface
         return Course::where('id', $id)->get();
     }
 
+    public function show($id)
+    {
+        return Course::where('id', $id)->get();
+    }
+
     /**
      * Update Course function
      *

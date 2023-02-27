@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TeacherRequest;
 use App\Models\Student;
 
 use App\Contracts\Services\StudentServiceInterface;

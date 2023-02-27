@@ -18,14 +18,14 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ $courses->course_id }}</td>
-                    <td>{{ $courses->name }}</td>
-                    <td>{{ $courses->description }}</td>
-                    <td>{{ $courses->total_lessons }}</td>
-                    <td>{{ $courses->start_date }}</td>
-                    <td>{{ $courses->course_duration }}</td>
-                    <td>{{ $courses->teacher->name }}</td>
-                    <td><a href="/courses/edit/{{ $courses->id }}" class="btn btn-primary">Edit</a></td>
+                    <td>{{ $data->course_id }}</td>
+                    <td>{{ $data->name }}</td>
+                    <td>{{ $data->description }}</td>
+                    <td>{{ $data->total_lessons }}</td>
+                    <td>{{ $data->start_date }}</td>
+                    <td>{{ $data->course_duration }}</td>
+                    <td>{{ $data->teacher->name }}</td>
+                    <td><a href="/courses/edit/{{ $data->id }}" class="btn btn-primary">Edit</a></td>
                 </tr>
             </tbody>
         </table>

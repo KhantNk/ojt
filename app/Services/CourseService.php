@@ -64,6 +64,11 @@ class CourseService implements CourseServiceInterface
         return $this->courseDao->edit($id);
     }
 
+    public function show($id)
+    {
+        return $this->courseDao->show($id);
+    }
+
 
     public function update($request, $id)
     {

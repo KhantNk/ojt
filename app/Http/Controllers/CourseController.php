@@ -32,13 +32,13 @@ class CourseController extends Controller
 
     public function create(Request $request)
     {
-        $data= $this->courseService->getAllCourses();
+        $data = $this->courseService->getAllCourses();
         return view('courses.create', compact('data'));
     }
 
 
     public function store(CourseRequest $request)
-    {  
+    {
         $this->courseService->store($request);
         return redirect('/courses');
     }
@@ -52,14 +52,14 @@ class CourseController extends Controller
 
     public function update(CourseRequest $request, $id)
     {
-       $this->courseService->update($request, $id);
+        $this->courseService->update($request, $id);
         return redirect('/courses');
     }
 
     public function show($id)
     {
-        $courses = Course::find($id);
-        return view('courses.show', compact('courses'));
+        $data = $this->courseService->show($id);
+        return view('courses.show')->with(['data' => $data[0]]);
     }
 
     public function destroy($id)

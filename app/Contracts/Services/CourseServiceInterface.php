@@ -8,6 +8,7 @@ interface CourseServiceInterface
     public function create($request);
     public function store($data);
     public function edit($id);
+    public function show($id);
     public function update($request, $id);
     public function destory($id);
 }
