@@ -22,7 +22,7 @@
                         <td>{{ $teacher->name }}</td>
                         <td>{{ $teacher->phone01 }}</td>
                         <td>{{ $teacher->email }}</td>
-                        {{-- <td><a href="/teachers/show/{{ $teacher->id }}" class="btn btn-primary">Detail</a></td> --}}
+
                         <td class="d-flex justify-content-between"><a href="/teachers/show/{{ $teacher->id }}"
                                 class="btn btn-primary">Detail</a>
                             <form action="/teachers/delete/{{ $teacher->id }}" method="POST">

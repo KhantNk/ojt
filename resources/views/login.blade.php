@@ -22,14 +22,14 @@
                         <div class="car-header bg-success pt-2">
                             <div class="card-title font-weight-bold text-white text-center"> User Login </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group p-3">
                             <label for="email"> E-mail </label>
                             <input type="text" name="email" id="email" class="form-control"
                                 placeholder="Enter E-mail" value="{{ old('email') }}" />
                             {!! $errors->first('email', '<small class="text-danger">:message</small>') !!}
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group p-3">
                             <label for="password"> Password </label>
                             <input type="password" name="password" id="password" class="form-control"
                                 placeholder="Enter Password" value="{{ old('password') }}" />
@@ -37,7 +37,7 @@
                         </div>
                     </div>
 
-                    <div class="card-footer d-inline-block">
+                    <div class="d-inline-block py-3">
                         <button type="submit" class="btn btn-success"> Login </button>
                         <p class="float-right mt-2"> Don't have an account? <a href="{{ url('teachers/create') }}"
                                 class="text-success"> Register </a> </p>

@@ -32,9 +32,7 @@ class TeacherController extends Controller
     {
         return view('teachers.index');
     }
-
     public function showList()
-
     {
         $data = $this->teacherService->getAllTeachers();
         return view('teachers.list', compact('data'));
@@ -46,11 +44,10 @@ class TeacherController extends Controller
         return view('teachers.create', compact('data'));
     }
 
-
     public function store(TeacherRequest $request)
     {
         $this->teacherService->store($request);
-        return redirect('/teachers');
+        return redirect('/login');
     }
 
     public function edit($id)
@@ -59,8 +56,7 @@ class TeacherController extends Controller
         return view('teachers.edit')->with(['data' => $data[0]]);
     }
 
-
-    public function update(TeacherRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $this->teacherService->update($request, $id);
         return redirect('/teachers');
@@ -74,7 +70,10 @@ class TeacherController extends Controller
 
     public function showLoginForm()
     {
-        return view('login');
+        if (auth::id()) {
+            return view('home');
+        }
+        return redirect('login');
     }
 
     public function  login(LoginRequest $request)
@@ -90,25 +89,24 @@ class TeacherController extends Controller
             return redirect('login')
                 ->with('error', 'Wrong Password');
         }
-        Session::put('id', $check->id);
-        Session::put('name', $check->name);
-        Log::info(Session::get('id'));
-        log::info(Session::get('name'));
-        return redirect('/teachers/home');
+        Session::put('AUTH_ID', $check->id);
+
+        return redirect('/home');
     }
 
-    public function dashboard()
+    public function home()
     {
-        return view('home');
+        if (auth::id()) {
+            return view('home');
+        }
+        return redirect('login');
     }
 
     public function logout()
     {
-        Session::forget('id');
-        Session::forget('name');
-        return redirect('/login');
+        Session::forget('AUTH_ID');
+        return view('/login');
     }
-
 
     public function destroy($id)
     {
