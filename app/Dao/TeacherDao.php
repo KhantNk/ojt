@@ -58,15 +58,19 @@ class TeacherDao implements TeacherDaoInterface
         return Teacher::where('id', $id)->get();
     }
 
+    public function findById($id)
+    {
+        return Teacher::find($id);
+    }
+
+    public function findByEmail($email)
+    {
+        return Teacher::where('email', '=', $email)->first();
+    }
+
     public function delete($id)
     {
         $teacher = Teacher::find($id);
         $teacher->delete();
     }
-	/**
-	 * @param mixed $data
-	 * @return mixed
-	 */
-	public function register($data) {
-	}
 }

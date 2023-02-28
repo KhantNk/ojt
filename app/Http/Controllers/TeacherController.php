@@ -28,14 +28,18 @@ class TeacherController extends Controller
         $this->teacherService = $teacherService;
     }
     public function index()
-
     {
         return view('teachers.index');
     }
     public function showList()
     {
-        $data = $this->teacherService->getAllTeachers();
-        return view('teachers.list', compact('data'));
+        $teacher = $this->teacherService->findById(session('AUTH_ID'));
+        if (!$teacher) {
+            return redirect('/login');
+        } else {
+            $data = $this->teacherService->getAllTeachers();
+            return view('teachers.list', compact('data'));
+        }
     }
 
     public function create(Request $request)
@@ -67,45 +71,46 @@ class TeacherController extends Controller
         $teachers = Teacher::find($id);
         return view('teachers.show', compact('teachers'));
     }
-
     public function showLoginForm()
     {
-        if (auth::id()) {
-            return view('home');
+        if (session()->has('AUTH_ID')) {
+            return redirect('/home');
+        } else {
+            return view('login');
         }
-        return redirect('login');
     }
 
-    public function  login(LoginRequest $request)
+    public function login(LoginRequest $request)
     {
         $email = $request->input('email');
         $password = $request->input('password');
-        $check = Teacher::where('email', '=', $email)->first();
-        if (!$check) {
-            return redirect('login')
-                ->with('error', 'Wrong Email');
+        $teacher = $this->teacherService->findByEmail($email);
+
+        if (!$teacher) {
+            return redirect('/login')->with('error', 'Invalid email or password.');
         }
-        if (!Hash::check($password, $check->password)) {
-            return redirect('login')
-                ->with('error', 'Wrong Password');
+        if (!Hash::check($password, $teacher->password)) {
+            return redirect('/login')->with('error', 'Invalid email or password.');
         }
-        Session::put('AUTH_ID', $check->id);
+        session()->put('AUTH_ID', $teacher->id);
 
         return redirect('/home');
     }
 
     public function home()
     {
-        if (auth::id()) {
-            return view('home');
+        $teacher = $this->teacherService->findById(session('AUTH_ID'));
+        if (!$teacher) {
+            return redirect('/login');
+        } else {
+            return view('home', ['teacher' => $teacher]);
         }
-        return redirect('login');
     }
 
     public function logout()
     {
-        Session::forget('AUTH_ID');
-        return view('/login');
+        session()->forget('AUTH_ID');
+        return redirect('/login');
     }
 
     public function destroy($id)

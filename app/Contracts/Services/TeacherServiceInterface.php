@@ -2,6 +2,8 @@
 
 namespace App\Contracts\Services;
 
+use Illuminate\Http\Request;
+
 interface TeacherServiceInterface
 {
     public function getAllTeachers();
@@ -10,4 +12,6 @@ interface TeacherServiceInterface
     public function edit($id);
     public function update($request, $id);
     public function destory($id);
+    public function findById($id);
+    public function findByEmail($email);
 }

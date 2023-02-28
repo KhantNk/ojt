@@ -4,8 +4,11 @@ namespace App\Services;
 
 use App\Contracts\Dao\TeacherDaoInterface;
 use App\Contracts\Services\TeacherServiceInterface;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Session;
+use TheSeer\Tokenizer\Exception;
 
 class TeacherService implements TeacherServiceInterface
 {
@@ -89,6 +92,17 @@ class TeacherService implements TeacherServiceInterface
             'is_left' => $request->is_left,
         ];
     }
+
+    public function findById($id)
+    {
+        return $this->teacherDao->findById($id);
+    }
+
+    public function findByEmail($email)
+    {
+        return $this->teacherDao->findByEmail($email);
+    }
+
 
     public function destory($id)
     {
