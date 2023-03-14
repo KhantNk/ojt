@@ -35,6 +35,10 @@ class TeacherService implements TeacherServiceInterface
         $this->getData($request);
     }
 
+    public function register($request)
+    {
+        $this->getData($request);
+    }
 
     public function store($request)
     {
@@ -99,7 +103,7 @@ class TeacherService implements TeacherServiceInterface
     }
 
     public function findByEmail($email)
-    {
+    {      
         return $this->teacherDao->findByEmail($email);
     }
 

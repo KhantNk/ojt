@@ -15,9 +15,10 @@ class userAuth
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */ public function handle($request, Closure $next)
     {
-        // if (!$request->is('login') && (!Session::has('id') || !Session::has('name'))) {
-        //     return redirect('login');
-        // }
-        // return $next($request);
+        if (Session::has('AUTH_ID')) {
+            return $next($request);
+        }
+
+        return redirect('/login');
     }
 }

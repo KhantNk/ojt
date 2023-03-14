@@ -33,19 +33,24 @@ class TeacherController extends Controller
     }
     public function showList()
     {
-        $teacher = $this->teacherService->findById(session('AUTH_ID'));
-        if (!$teacher) {
-            return redirect('/login');
-        } else {
-            $data = $this->teacherService->getAllTeachers();
-            return view('teachers.list', compact('data'));
-        }
+        $data = $this->teacherService->getAllTeachers();
+        return view('teachers.list', compact('data'));
     }
 
     public function create(Request $request)
     {
         $data = $this->teacherService->getAllTeachers();
         return view('teachers.create', compact('data'));
+    }
+
+    public function register(Request $request)
+    {
+        if (!Session::has('AUTH_ID')) {
+            $data = $this->teacherService->getAllTeachers();
+            return view('teachers.create', compact('data'));
+        }else{
+            return view('home');
+        }
     }
 
     public function store(TeacherRequest $request)
@@ -73,11 +78,7 @@ class TeacherController extends Controller
     }
     public function showLoginForm()
     {
-        if (session()->has('AUTH_ID')) {
-            return redirect('/home');
-        } else {
-            return view('login');
-        }
+        return view('login');
     }
 
     public function login(LoginRequest $request)
@@ -87,24 +88,18 @@ class TeacherController extends Controller
         $teacher = $this->teacherService->findByEmail($email);
 
         if (!$teacher) {
-            return redirect('/login')->with('error', 'Invalid email or password.');
+            return redirect('/login')->with('error', 'Invalid email.');
         }
         if (!Hash::check($password, $teacher->password)) {
-            return redirect('/login')->with('error', 'Invalid email or password.');
+            return redirect('/login')->with('error', 'Invalid password.');
         }
         session()->put('AUTH_ID', $teacher->id);
-
         return redirect('/home');
     }
 
     public function home()
     {
-        $teacher = $this->teacherService->findById(session('AUTH_ID'));
-        if (!$teacher) {
-            return redirect('/login');
-        } else {
-            return view('home', ['teacher' => $teacher]);
-        }
+        return view('home');
     }
 
     public function logout()
