@@ -55,7 +55,6 @@ Route::delete('/courses/delete/{id}', [CourseController::class, 'destroy']);
 Route::middleware(['userAuth'])->group(function () {
     Route::get('/teachers', [TeacherController::class, 'showList']);
     Route::post('/teachers/store', [TeacherController::class, 'store']);
-    Route::get('/teachers/create', [TeacherController::class, 'create']);
     Route::get('/teachers/edit/{id}', [TeacherController::class, 'edit']);
     Route::post('/teachers/update/{id}', [TeacherController::class, 'update']);
     Route::get('/teachers/show/{id}', [TeacherController::class, 'show']);
@@ -64,6 +63,7 @@ Route::middleware(['userAuth'])->group(function () {
     Route::get('/logout', [TeacherController::class, 'logout']);
 });
 
-Route::get('/teachers/register', [TeacherController::class, 'register']);
+
+Route::get('/teachers/create', [TeacherController::class, 'create']);
 Route::get('/login', [TeacherController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [TeacherController::class, 'login']);

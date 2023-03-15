@@ -28,6 +28,14 @@
                                 <div style="color: red">{{ $message }}</div>
                             @enderror
                         </div>
+
+                        <div class="form-group pb-3">
+                            <label for="email">Password</label>
+                            <input type="password" name="password" id="password" class="form-control" value="">
+                            @error('password')
+                                <div style="color: red">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="form-group pb-3">
                             <label for="phone">Phone Number</label>
                             <input type="number" class="form-control" id="phone" name="phone"

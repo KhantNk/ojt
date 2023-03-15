@@ -43,16 +43,6 @@ class TeacherController extends Controller
         return view('teachers.create', compact('data'));
     }
 
-    public function register(Request $request)
-    {
-        if (!Session::has('AUTH_ID')) {
-            $data = $this->teacherService->getAllTeachers();
-            return view('teachers.create', compact('data'));
-        }else{
-            return view('home');
-        }
-    }
-
     public function store(TeacherRequest $request)
     {
         $this->teacherService->store($request);

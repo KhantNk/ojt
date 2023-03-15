@@ -39,7 +39,7 @@
 
                     <div class="d-inline-block py-3">
                         <button type="submit" class="btn btn-success"> Login </button>
-                        <p class="float-right mt-2"> Don't have an account? <a href="{{ url('teachers/register') }}"
+                        <p class="float-right mt-2"> Don't have an account? <a href="{{ url('teachers/create') }}"
                                 class="text-success"> Register </a> </p>
                     </div>
                 </form>

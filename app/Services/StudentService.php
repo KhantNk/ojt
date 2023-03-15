@@ -32,10 +32,11 @@ class StudentService implements StudentServiceInterface
     {
         $data = [
             'name' => $request->name,
-            'phone' => $request->phone,
             'email' => $request->email,
-            'gender' =>  $request->gender,
-            'address'=> $request->address,
+            'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'gender' => $request->gender,
             'dob' => $request->dob,
         ];
 

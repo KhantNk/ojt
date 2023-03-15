@@ -22,11 +22,6 @@ class TeacherDao implements TeacherDaoInterface
     {
         Teacher::insert($data);
     }
-
-    public function register($data)
-    {
-        Teacher::insert($data);
-    }
     public function store($data)
     {
         Teacher::insert($data);
